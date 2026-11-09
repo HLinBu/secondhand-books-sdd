@@ -34,4 +34,6 @@
 - 3 個 [NEEDS CLARIFICATION] 已由人類於 2026-11-10 回答，結果記錄在 spec 的 Clarifications。
 - NFR-003「密碼雜湊」來自規格書品質要求，不視為實作細節。
 - 13 項 AI 推測（AI-01 至 AI-13）已由人類於 2026-11-10 全部否決，並從 spec 內文移除。
+- Constitution 修訂為 v2.0.0 後，人類於 Plan 階段重審：AI-01 至 AI-11、AI-13 接受並寫回 spec，AI-12 維持否決；實作所需的值 V-01 至 V-05 接受。
+- 「No implementation details」：spec 只寫需求與採用的值，技術選型只放在 plan.md 與 research.md，仍通過。
 - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`
