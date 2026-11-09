@@ -2,20 +2,21 @@
 
 ## Core Principles
 
-### I. 範圍限於需求分析
+### I. 範圍：需求分析與程式實作
 本專案為期中專題 Bonus「AI-Agent Method」，採 Spec-driven development（GitHub Spec Kit：
-Specify → Plan → Tasks），工作範圍止於 Requirement Analysis（需求分析）。
+Specify → Plan → Tasks → Implement），範圍包含需求分析與程式實作。
 
-- 不得撰寫、產生或提交任何應用程式原始碼、測試或部署設定。
-- 不得執行 `/speckit-implement` 與 `/speckit-converge`。
-- `/speckit-plan` 與 `/speckit-tasks` 的產出只描述需求、資料與分析工作，不得包含實作步驟。
+- 程式實作由 agent 執行 `/speckit-implement`，依 `tasks.md` 進行。
+- 技術選型（程式語言、框架、資料庫等）由 agent 提出選項與差異，由人類選定；人類選定前不得開始實作。
+- 不得執行 `/speckit-converge`，除非人類另行核准。
+- 實作內容不得超出已核准的 spec、plan 與 tasks。
 
-理由：專題規定各方法只做到需求分析，三種方法才能在相同範圍內比較。
+理由：人類於 2026-11-10 決定進行程式實作，並由 agent 執行；範圍與技術由人類掌控。
 
-### II. 規格書為唯一需求來源
-唯一需求來源是《二手書交易平台基礎規格書》（2026-11-01）。
+### II. 規格書為需求來源
+需求來源是《二手書交易平台基礎規格書》（2026-11-01），以及各階段經人類核准的決定。
 
-- 規格書未提及的功能不得自行新增為需求。
+- 規格書未提及的功能不得由 agent 自行新增為需求。
 - 規格書列為「MVP 不做」的項目一律排除：原生 App、競標、以物易物、實體店面後台、跨境交易、
   線上付款、真實物流串接、平台收費。
 - 規格書標示「必做」的模組（帳號、上架、瀏覽、交易、售後、管理）必須完整涵蓋；
@@ -23,13 +24,15 @@ Specify → Plan → Tasks），工作範圍止於 Requirement Analysis（需求
 - 業務規則的天數一律採規格書預設值（出貨 3 天、收貨確認 3 天、評價 14 天）。
 - AI 推測、補充或新增的任何需求必須明確標示為「AI 推測」，並列入待人類判定清單；
   人類判定前不得視為已確認需求。
+- 實作需要、但規格書未定義的值（例如分類清單、狀態值、上限數值），由 agent 提出並標示為
+  「AI 推測」，經人類核准後才能採用。
 
-理由：讓審查者能分辨規格書原有需求、模糊需求與 AI 編造的需求，供報告比較使用。
+理由：讓審查者能分辨規格書原有需求、模糊需求與 AI 編造的需求，並讓實作所需的空缺由人類決定。
 
 ### III. AI 起草、人類核准（不可協商）
 AI agent 只能起草；人類對所有產出負最終責任。
 
-- 每個階段（constitution、specify、clarify、plan、tasks）結束時，必須由具名的團隊成員
+- 每個階段（constitution、specify、clarify、plan、tasks、implement）結束時，必須由具名的團隊成員
   review 並核准，agent 才能進入下一階段。
 - 人類否決或修改的內容必須記錄原因。
 - agent 不得自行核准、合併或略過任何審查關卡。
@@ -38,7 +41,7 @@ AI agent 只能起草；人類對所有產出負最終責任。
 
 ### IV. 以 Pull Request 為唯一合併途徑
 - agent 不得在人類 review 之前 commit 或 push。
-- 每個階段的產出必須以一個 Pull Request 提交到 `main`。
+- 每個階段的產出必須以 Pull Request 提交到 `main`；Implement 階段可依 `tasks.md` 分成多個 PR。
 - 合併前，人類必須在 PR 上留下 review 意見；合併動作必須由人類執行。
 - 不得直接 push 到 `main`。
 
@@ -49,6 +52,7 @@ AI agent 只能起草；人類對所有產出負最終責任。
 
 - spec 與各階段產出：`specs/` 目錄（Spec Kit 預設位置）。
 - agent 的 plans：`specs/` 下各功能的 `plan.md`、`tasks.md` 等。
+- 程式碼與測試：放在 `plan.md` 決定的目錄。
 - agent 對話紀錄（transcripts）：`docs/transcripts/`，每個階段至少一份。
 - 人類 review 紀錄：`docs/reviews/`，每個階段一份，內容包含審查者、日期、核准或否決項目及原因、
   對應的 PR 連結。
@@ -59,8 +63,9 @@ AI agent 只能起草；人類對所有產出負最終責任。
 ## 資料安全與品質要求
 
 ### 資料安全
-- prompt、transcripts 與 repository 中不得出現機密資料、密碼、存取權杖或真實個人資料。
-- 範例資料（使用者、Email、地址、訂單）一律使用明顯虛構的假資料。
+- prompt、transcripts、程式碼與 repository 中不得出現機密資料、密碼、存取權杖或真實個人資料。
+- 範例資料與測試資料（使用者、Email、地址、訂單）一律使用明顯虛構的假資料。
+- 程式碼與設定檔不得提交任何密鑰；需要時以範例設定檔說明。
 - 提交 transcripts 前，人類必須檢查並移除任何敏感內容。
 
 ### 必須保留的非功能需求
@@ -77,8 +82,9 @@ AI agent 只能起草；人類對所有產出負最終責任。
 | 0. 原則 | `/speckit-constitution` | 本文件 | 核准 constitution PR |
 | 1. Specify | `/speckit-specify` | `spec.md` | 核准需求範圍與 AI 推測項目 |
 | 2. Clarify | `/speckit-clarify` | 更新後的 `spec.md` | 由人類回答所有澄清問題 |
-| 3. Plan | `/speckit-plan` | `plan.md`、資料模型等分析文件 | 核准分析結果 |
-| 4. Tasks | `/speckit-tasks` | `tasks.md`（需求分析工作項目） | 核准並結束本方法 |
+| 3. Plan | `/speckit-plan` | `plan.md`、資料模型等文件 | 選定技術、核准規格書未定義的值與設計 |
+| 4. Tasks | `/speckit-tasks` | `tasks.md` | 核准實作工作項目 |
+| 5. Implement | `/speckit-implement` | 程式碼與測試 | 每個 PR 由人類 review 程式碼後 merge |
 
 - 每個階段的 PR 必須同時包含該階段的產出、transcript 與 review 紀錄。
 - 上一階段的 PR 未合併前，不得開始下一階段。
@@ -94,4 +100,4 @@ AI agent 只能起草；人類對所有產出負最終責任。
   - PATCH：文字澄清、錯字修正等不影響語意的修改。
 - 每個階段的 PR review 必須確認產出符合本 constitution，特別是原則 I（範圍）與原則 II（需求來源）。
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-09 | **Last Amended**: 2026-11-09
+**Version**: 2.0.0 | **Ratified**: 2026-11-09 | **Last Amended**: 2026-11-10
