@@ -29,12 +29,12 @@ description: "Task list for 二手書交易平台 MVP implementation"
 
 **Purpose**: 建立 Django 專案與 6 個 app 的骨架
 
-- [ ] T001 建立 `pyproject.toml`：Python 3.12；依賴 `django>=5.2,<5.3`、`pillow`、`python-dotenv`；以 `uv sync` 安裝（research R-01、R-02）
-- [ ] T002 在 repo 根目錄建立 Django 專案：`manage.py` 與 `config/`（`settings.py`、`urls.py`、`wsgi.py`、`asgi.py`）
-- [ ] T003 [P] 建立 `apps/__init__.py`，以及 `apps/accounts/`、`apps/catalog/`、`apps/orders/`、`apps/messaging/`、`apps/favorites/`、`apps/backoffice/` 六個 app，各自的 `apps.py` 設定 `name = "apps.<app>"`，並建立空的 `tests/__init__.py`
-- [ ] T004 [P] 更新 `.gitignore`：加入 `.env`、`db.sqlite3`、`media/`、`sent_emails/`、`.venv/`、`__pycache__/`
-- [ ] T005 [P] 建立 `.env.example`：`DJANGO_SECRET_KEY`（範例值，註明需自行替換）、`DJANGO_DEBUG=True`、`EMAIL_FILE_PATH=sent_emails`（constitution 資料安全：不提交密鑰）
-- [ ] T006 設定 `config/settings.py`：用 python-dotenv 讀取 `.env`；`INSTALLED_APPS` 加入六個 app；SQLite 資料庫 `db.sqlite3`；`LANGUAGE_CODE="zh-hant"`、`TIME_ZONE="Asia/Taipei"`、`USE_TZ=True`；`AUTH_USER_MODEL="accounts.User"`；`EMAIL_BACKEND="django.core.mail.backends.filebased.EmailBackend"`、`EMAIL_FILE_PATH` 取自 `.env`；`MEDIA_ROOT=media/`、`STATICFILES_DIRS=[static/]`、`TEMPLATES` 的 `DIRS=[templates/]`；`LOGIN_URL="/accounts/login/"`
+- [X] T001 建立 `pyproject.toml`：Python 3.12；依賴 `django>=5.2,<5.3`、`pillow`、`python-dotenv`；以 `uv sync` 安裝（research R-01、R-02）
+- [X] T002 在 repo 根目錄建立 Django 專案：`manage.py` 與 `config/`（`settings.py`、`urls.py`、`wsgi.py`、`asgi.py`）
+- [X] T003 [P] 建立 `apps/__init__.py`，以及 `apps/accounts/`、`apps/catalog/`、`apps/orders/`、`apps/messaging/`、`apps/favorites/`、`apps/backoffice/` 六個 app，各自的 `apps.py` 設定 `name = "apps.<app>"`，並建立空的 `tests/__init__.py`
+- [X] T004 [P] 更新 `.gitignore`：加入 `.env`、`db.sqlite3`、`media/`、`sent_emails/`、`.venv/`、`__pycache__/`
+- [X] T005 [P] 建立 `.env.example`：`DJANGO_SECRET_KEY`（範例值，註明需自行替換）、`DJANGO_DEBUG=True`、`EMAIL_FILE_PATH=sent_emails`（constitution 資料安全：不提交密鑰）
+- [X] T006 設定 `config/settings.py`：用 python-dotenv 讀取 `.env`；`INSTALLED_APPS` 加入六個 app；SQLite 資料庫 `db.sqlite3`；`LANGUAGE_CODE="zh-hant"`、`TIME_ZONE="Asia/Taipei"`、`USE_TZ=True`；`AUTH_USER_MODEL="accounts.User"`；`EMAIL_BACKEND="django.core.mail.backends.filebased.EmailBackend"`、`EMAIL_FILE_PATH` 取自 `.env`；`MEDIA_ROOT=media/`、`STATICFILES_DIRS=[static/]`、`TEMPLATES` 的 `DIRS=[templates/]`；`LOGIN_URL="/accounts/login/"`
 
 ---
 
@@ -44,19 +44,19 @@ description: "Task list for 二手書交易平台 MVP implementation"
 
 **⚠️ CRITICAL**: 這個階段完成前，不能開始任何 User Story
 
-- [ ] T007 在 `apps/accounts/models.py` 建立自訂 `User`（繼承 `AbstractBaseUser`、`PermissionsMixin`）：`email`（登入帳號，「作為登入帳號，不可重複」）、`nickname`（暱稱）、`role`（choices：一般使用者、管理員，「一般使用者或管理員（AI-10）」，預設一般使用者）、`email_verified`（預設 False）、`deletion_requested_at`（「沒有申請時為空」，可為空）、`is_active`（停權狀態，False 表示停權，AI-06）、`date_joined`；`is_staff` 在 `save()` 時依 `role == 管理員` 設定；`USERNAME_FIELD="email"`
-- [ ] T008 在 `apps/accounts/managers.py` 建立 `UserManager`：`create_user` 一律建立 role 為一般使用者的帳號；`create_superuser` 建立 role 為管理員、`email_verified=True` 的帳號（AI-13：管理員由平台建立）
-- [ ] T009 產生並套用 accounts 的初始 migration：`apps/accounts/migrations/0001_initial.py`
-- [ ] T010 [P] 建立 `templates/base.html`：viewport meta、頂部導覽（首頁、建立刊登、我的訂單、我的收藏、站內通知、個人檔案、登入／登出）、Django messages 區塊
-- [ ] T011 [P] 建立 `static/css/site.css`：以手機寬度為基準的版面，表單、按鈕、清單、卡片，寬螢幕時加寬內容區（NFR-009、research R-08）
-- [ ] T012 [P] 在 `apps/catalog/validators.py` 建立 `validate_image(file)`：用 Pillow 開啟並確認格式為 JPEG、PNG 或 WEBP，不只看副檔名；檔案大小上限 5 MB；錯誤訊息說明原因（「只接受 JPEG、PNG、WebP，單張最多 5 MB」，NFR-005、AI-11、research R-07）
-- [ ] T013 [P] 在 `apps/catalog/tests/test_validators.py` 測試 `validate_image`：JPEG、PNG、WebP 通過；超過 5 MB 拒絕；副檔名改成 `.jpg` 的文字檔拒絕；GIF 拒絕
-- [ ] T014 [P] 在 `apps/backoffice/models.py` 建立 `AdminLog`：`actor`（操作者，FK User）、`created_at`（時間）、`target`（對象，文字，例如「Order #12」）、`content`（內容）；「紀錄只能新增，不能修改或刪除」：覆寫 `save()` 在已存在時拋出例外，覆寫 `delete()` 拋出例外（P-05、FR-030）
-- [ ] T015 在 `apps/backoffice/services.py` 建立 `record_admin_action(actor, target, content)`，寫入一筆 `AdminLog`（依賴 T014）
-- [ ] T016 [P] 在 `apps/backoffice/tests/test_admin_log.py` 測試：`record_admin_action` 會新增紀錄；修改或刪除既有紀錄會失敗
-- [ ] T017 [P] 在 `apps/accounts/decorators.py` 建立 `verified_required`：未登入導向登入頁；未驗證 Email 時顯示「請先完成 Email 驗證」並拒絕（AI-01）
-- [ ] T018 設定 `config/urls.py`：`/admin/` 與各 app 的 `urls.py`；`DEBUG` 時提供 `media/` 檔案
-- [ ] T019 產生並套用 backoffice 的 migration：`apps/backoffice/migrations/0001_initial.py`
+- [X] T007 在 `apps/accounts/models.py` 建立自訂 `User`（繼承 `AbstractBaseUser`、`PermissionsMixin`）：`email`（登入帳號，「作為登入帳號，不可重複」）、`nickname`（暱稱）、`role`（choices：一般使用者、管理員，「一般使用者或管理員（AI-10）」，預設一般使用者）、`email_verified`（預設 False）、`deletion_requested_at`（「沒有申請時為空」，可為空）、`is_active`（停權狀態，False 表示停權，AI-06）、`date_joined`；`is_staff` 在 `save()` 時依 `role == 管理員` 設定；`USERNAME_FIELD="email"`
+- [X] T008 在 `apps/accounts/managers.py` 建立 `UserManager`：`create_user` 一律建立 role 為一般使用者的帳號；`create_superuser` 建立 role 為管理員、`email_verified=True` 的帳號（AI-13：管理員由平台建立）
+- [X] T009 產生並套用 accounts 的初始 migration：`apps/accounts/migrations/0001_initial.py`
+- [X] T010 [P] 建立 `templates/base.html`：以 Bootstrap 5.3 建立響應式導覽列（手機收合）、搜尋框、賣書按鈕、我的訂單、收藏、站內通知、個人選單（個人檔案、我的刊登、管理後台、登出）、Django messages 提示、頁尾；載入 `static/vendor/` 的 Bootstrap 與 Bootstrap Icons（research R-08，Implement-1 修訂）
+- [X] T011 [P] 建立 `static/css/site.css`：覆寫 Bootstrap 的品牌色（青綠色）、字型、圓角、陰影，並提供卡片、書封、狀態標籤、窄表單等共用樣式；設定 django-unfold 後台主題使用相同品牌色（NFR-009、research R-08，Implement-1 修訂）
+- [X] T012 [P] 在 `apps/catalog/validators.py` 建立 `validate_image(file)`：用 Pillow 開啟並確認格式為 JPEG、PNG 或 WEBP，不只看副檔名；檔案大小上限 5 MB；錯誤訊息說明原因（「只接受 JPEG、PNG、WebP，單張最多 5 MB」，NFR-005、AI-11、research R-07）
+- [X] T013 [P] 在 `apps/catalog/tests/test_validators.py` 測試 `validate_image`：JPEG、PNG、WebP 通過；超過 5 MB 拒絕；副檔名改成 `.jpg` 的文字檔拒絕；GIF 拒絕
+- [X] T014 [P] 在 `apps/backoffice/models.py` 建立 `AdminLog`：`actor`（操作者，FK User）、`created_at`（時間）、`target`（對象，文字，例如「Order #12」）、`content`（內容）；「紀錄只能新增，不能修改或刪除」：覆寫 `save()` 在已存在時拋出例外，覆寫 `delete()` 拋出例外（P-05、FR-030）
+- [X] T015 在 `apps/backoffice/services.py` 建立 `record_admin_action(actor, target, content)`，寫入一筆 `AdminLog`（依賴 T014）
+- [X] T016 [P] 在 `apps/backoffice/tests/test_admin_log.py` 測試：`record_admin_action` 會新增紀錄；修改或刪除既有紀錄會失敗
+- [X] T017 [P] 在 `apps/accounts/decorators.py` 建立 `verified_required`：未登入導向登入頁；未驗證 Email 時顯示「請先完成 Email 驗證」並拒絕（AI-01）
+- [X] T018 設定 `config/urls.py`：`/admin/` 與各 app 的 `urls.py`；`DEBUG` 時提供 `media/` 檔案
+- [X] T019 產生並套用 backoffice 的 migration：`apps/backoffice/migrations/0001_initial.py`
 
 **Checkpoint**: `uv run python manage.py test` 可執行且 T013、T016 通過
 

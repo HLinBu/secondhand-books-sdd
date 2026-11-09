@@ -1,0 +1,182 @@
+/*
+ * 二手書交易平台主題：以 Bootstrap 5.3 為 design system，這裡只覆寫品牌色、字型與元件風格。
+ * 品牌色與後台（django-unfold）共用青綠色系（research R-08）。
+ */
+
+:root {
+  --brand-50: #f0fdfa;
+  --brand-100: #ccfbf1;
+  --brand-500: #14b8a6;
+  --brand-600: #0d9488;
+  --brand-700: #0f766e;
+  --brand-800: #115e59;
+  --accent: #f59e0b;
+  --surface: #ffffff;
+  --page-bg: #f7f7f5;
+
+  --bs-primary: var(--brand-700);
+  --bs-primary-rgb: 15, 118, 110;
+  --bs-link-color: var(--brand-700);
+  --bs-link-color-rgb: 15, 118, 110;
+  --bs-link-hover-color: var(--brand-800);
+  --bs-link-hover-color-rgb: 17, 94, 89;
+  --bs-body-bg: var(--page-bg);
+  --bs-body-font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bs-border-radius: 0.75rem;
+  --bs-border-radius-sm: 0.5rem;
+  --bs-border-radius-lg: 1rem;
+  --bs-focus-ring-color: rgba(15, 118, 110, 0.25);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 按鈕 */
+
+.btn-primary {
+  --bs-btn-bg: var(--brand-700);
+  --bs-btn-border-color: var(--brand-700);
+  --bs-btn-hover-bg: var(--brand-800);
+  --bs-btn-hover-border-color: var(--brand-800);
+  --bs-btn-active-bg: var(--brand-800);
+  --bs-btn-active-border-color: var(--brand-800);
+  --bs-btn-disabled-bg: var(--brand-600);
+  --bs-btn-disabled-border-color: var(--brand-600);
+  font-weight: 600;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--brand-700);
+  --bs-btn-border-color: var(--brand-700);
+  --bs-btn-hover-bg: var(--brand-700);
+  --bs-btn-hover-border-color: var(--brand-700);
+  --bs-btn-active-bg: var(--brand-800);
+  --bs-btn-active-border-color: var(--brand-800);
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color);
+}
+
+.form-check-input:checked {
+  background-color: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+/* 導覽列 */
+
+.site-navbar {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.6rem;
+  background: linear-gradient(135deg, var(--brand-600), var(--brand-800));
+  color: #fff;
+}
+
+.site-search {
+  max-width: 32rem;
+}
+
+.site-search .input-group-text {
+  background: var(--surface);
+  color: var(--bs-secondary-color);
+}
+
+.navbar .nav-link {
+  color: #374151;
+  font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+  color: var(--brand-700);
+}
+
+/* 卡片：用於刊登、訂單、表單 */
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.1);
+}
+
+.card-cover {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--brand-50);
+}
+
+/* 頁面標題區 */
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* 狀態標籤：刊登與訂單狀態 */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--brand-50);
+  color: var(--brand-800);
+}
+
+.status-badge.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.muted {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+/* 表單頁：置中的窄卡片 */
+
+.form-narrow {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+/* 頁尾 */
+
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}

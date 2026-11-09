@@ -52,11 +52,11 @@ R-01 由人類選定；R-02 起是 agent 依選定的技術提出的設計決策
 - **Rationale**: 只看副檔名可以被改名繞過；密鑰不可提交是 constitution v2.0.0 的資料安全規定。
 - **Alternatives considered**: 只檢查副檔名。容易被繞過。
 
-## R-08 響應式畫面
+## R-08 響應式畫面與 design system（Implement-1 修訂）
 
-- **Decision**: Django 範本搭配一份自己寫的 CSS，以手機寬度為基準，不使用需要建置流程的前端框架。
-- **Rationale**: 不需要 Node 建置步驟，組員只要裝 Python 就能執行。
-- **Alternatives considered**: Tailwind CSS（需要建置）、從 CDN 載入 Bootstrap（離線展示時無法載入）。
+- **Decision**: 前台以 Bootstrap 5.3.3 為 design system，搭配 Bootstrap Icons 1.11.3；發行檔放在 `static/vendor/`，另以 `static/css/site.css` 覆寫品牌色（青綠色）、字型、圓角與陰影。後台使用 django-unfold 主題，品牌色與前台相同。
+- **Rationale**: 審查者於 Implement-1 要求改用 design system 與現代化設計。Bootstrap 的發行檔直接放在 repo 中，不需要 Node 建置，也不需要連網路；django-unfold 以 Python 套件安裝，不需要額外建置。
+- **Alternatives considered**: 自己寫 CSS（原決策，審查者認為畫面過於樸素）；Tailwind CSS（需要建置）；從 CDN 載入 Bootstrap（離線展示時無法載入）。
 
 ## R-09 規格書未定義的值
 

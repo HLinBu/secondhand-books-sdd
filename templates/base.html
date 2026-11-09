@@ -1,0 +1,105 @@
+{% load static %}<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}二手書交易平台{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg site-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <span class="brand-mark"><i class="bi bi-book-half"></i></span>
+        <span class="fw-bold">二手書交易平台</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav"
+              aria-controls="siteNav" aria-expanded="false" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="siteNav">
+        <form class="site-search d-flex my-3 my-lg-0 mx-lg-4 flex-grow-1" role="search" method="get" action="/">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input class="form-control" type="search" name="q" value="{{ request.GET.q }}"
+                   placeholder="搜尋書名、作者或 ISBN" aria-label="搜尋">
+          </div>
+        </form>
+
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="btn btn-primary btn-sm px-3 my-2 my-lg-0 me-lg-2" href="/listings/new/">
+                <i class="bi bi-plus-lg"></i> 賣書
+              </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/orders/"><i class="bi bi-bag"></i> 我的訂單</a></li>
+            <li class="nav-item"><a class="nav-link" href="/favorites/"><i class="bi bi-heart"></i> 收藏</a></li>
+            <li class="nav-item">
+              <a class="nav-link position-relative" href="/notifications/">
+                <i class="bi bi-bell"></i> 通知
+                {% if unread_notification_count %}
+                  <span class="badge rounded-pill text-bg-danger">{{ unread_notification_count }}</span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> {{ user.nickname }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                <li><a class="dropdown-item" href="/accounts/profile/"><i class="bi bi-person"></i> 個人檔案</a></li>
+                <li><a class="dropdown-item" href="/listings/mine/"><i class="bi bi-journal-bookmark"></i> 我的刊登</a></li>
+                {% if user.is_staff %}
+                  <li><a class="dropdown-item" href="/admin/"><i class="bi bi-speedometer2"></i> 管理後台</a></li>
+                {% endif %}
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form method="post" action="/accounts/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> 登出</button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="/accounts/login/">登入</a></li>
+            <li class="nav-item">
+              <a class="btn btn-primary btn-sm px-3 my-2 my-lg-0" href="/accounts/register/">註冊</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1 py-4">
+    <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags|default:'info' }}{% endif %} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="關閉"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <footer class="site-footer py-4 mt-auto">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 small">
+      <span><i class="bi bi-book-half"></i> 二手書交易平台</span>
+      <span class="text-body-secondary">平台只記錄交易進度，不經手款項；物流為模擬。</span>
+    </div>
+  </footer>
+
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

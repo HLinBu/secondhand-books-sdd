@@ -27,7 +27,7 @@ Plan 階段的產出：
 
 **Language/Version**: Python 3.12
 
-**Primary Dependencies**: Django 5.2 LTS；Pillow（檢查上傳圖片）
+**Primary Dependencies**: Django 5.2 LTS；Pillow（檢查上傳圖片）；python-dotenv（讀取 `.env`）；django-unfold（後台主題）；Bootstrap 5.3.3 與 Bootstrap Icons 1.11.3（前台 design system，發行檔放在 `static/vendor/`）
 
 **Storage**: SQLite（單一檔案，不需另外安裝）；上傳的照片存放在本機 `media/` 目錄
 
@@ -100,7 +100,9 @@ apps/
 ├── favorites/           # 留存（建議）：收藏、站內通知
 └── backoffice/          # 管理：後台、裁決、停權、刪除帳號、操作紀錄
 templates/               # 共用版面與各頁面範本
-static/                  # CSS
+static/
+├── css/site.css         # 品牌主題，覆寫 Bootstrap
+└── vendor/              # Bootstrap 5.3.3、Bootstrap Icons 1.11.3 發行檔
 media/                   # 上傳照片（不提交）
 ```
 
