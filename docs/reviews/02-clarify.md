@@ -7,7 +7,7 @@
 | 審查者 | HLinBu |
 | 審查日期 | 2026-11-10 |
 | 結果（核准 / 修改後核准 / 否決） | 核准 |
-| PR 連結 | |
+| PR 連結 | https://github.com/HLinBu/secondhand-books-sdd/pull/4 |
 
 ## 核准的內容
 
