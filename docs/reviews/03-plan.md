@@ -4,7 +4,7 @@
 | --- | --- |
 | 階段 | 3. Plan（`/speckit-plan`） |
 | 審查對象 | `specs/001-secondhand-book-marketplace/` 下的 `plan.md`、`research.md`、`data-model.md`、`contracts/system-operations.md`、`contracts/pages.md`、`quickstart.md`，以及更新後的 `spec.md` |
-| 審查者 | HLinBu |
+| 審查者 | HLinBu（判定與技術選型）、MushroomAdy（PR 審查與 merge） |
 | 審查日期 | 2026-11-10 |
 | 結果（核准 / 修改後核准 / 否決） | 修改後核准 |
 | PR 連結 | https://github.com/HLinBu/secondhand-books-sdd/pull/6 |
