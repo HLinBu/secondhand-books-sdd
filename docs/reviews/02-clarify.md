@@ -4,7 +4,7 @@
 | --- | --- |
 | 階段 | 2. Clarify（`/speckit-clarify`） |
 | 審查對象 | `specs/001-secondhand-book-marketplace/spec.md`（Clarifications 與相關需求） |
-| 審查者 | HLinBu |
+| 審查者 | HLinBu（回答澄清問題）、MushroomAdy（PR 審查與 merge） |
 | 審查日期 | 2026-11-10 |
 | 結果（核准 / 修改後核准 / 否決） | 核准 |
 | PR 連結 | https://github.com/HLinBu/secondhand-books-sdd/pull/4 |
