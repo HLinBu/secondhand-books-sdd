@@ -7,7 +7,7 @@
 | 審查者 | HLinBu |
 | 審查日期 | 2026-11-02（constitution 內容）、2026-11-09（對話紀錄） |
 | 結果（核准 / 修改後核准 / 否決） | 修改後核准 |
-| PR 連結 |  |
+| PR 連結 | https://github.com/HLinBu/secondhand-books-sdd/pull/2 |
 
 ## 核准的內容
 
