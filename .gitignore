@@ -1,0 +1,18 @@
+# 環境變數與密鑰（constitution：不得提交密鑰）
+.env
+
+# 本機資料
+db.sqlite3
+media/
+sent_emails/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# 系統與編輯器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

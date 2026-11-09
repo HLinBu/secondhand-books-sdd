@@ -4,7 +4,7 @@
 | --- | --- |
 | 階段 | 4. Tasks（`/speckit-tasks`） |
 | 審查對象 | `specs/001-secondhand-book-marketplace/tasks.md`，以及因 Q-01、Q-02 更新的 `spec.md`、`data-model.md` |
-| 審查者 | HLinBu |
+| 審查者 | MushroomAdy（判定待確認事項、PR 審查與 merge） |
 | 審查日期 | 2026-11-10 |
 | 結果（核准 / 修改後核准 / 否決） | 核准 |
 | PR 連結 | https://github.com/HLinBu/secondhand-books-sdd/pull/7 |
